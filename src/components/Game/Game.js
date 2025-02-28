@@ -1,4 +1,5 @@
-import React from 'react';
+import { useState } from 'react';
+import InputForm from '../InputForm';
 
 import { sample } from '../../utils';
 import { WORDS } from '../../data';
@@ -9,7 +10,16 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
-  return <>Put a game here!</>;
+  function submitGuess(guess) {
+    if (guess.length === 0) return;
+    console.log(guess);
+  }
+
+  return (
+    <>
+      <InputForm submitGuess={submitGuess} />
+    </>
+  );
 }
 
 export default Game;
