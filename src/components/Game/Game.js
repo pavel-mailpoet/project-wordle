@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import InputForm from '../InputForm';
 import GuessResults from '../GuessResults';
-
+import { checkGuess } from '../../game-helpers';
 import { sample } from '../../utils';
 import { WORDS } from '../../data';
 
@@ -12,12 +12,21 @@ console.info({ answer });
 
 function Game() {
   const [guesses, setGuesses] = useState([]);
+  
 
 
   return (
     <>
       <GuessResults guesses={guesses} />
-      <InputForm submitGuess={(guess) => setGuesses([...guesses, guess])} />
+      <InputForm submitGuess={
+        (guess) => {
+          const result = checkGuess(guess, answer);
+          console.log('result', result);
+          
+          setGuesses([...guesses, {guess, result}]);
+        }
+      } 
+      />
     </>
   );
 }
